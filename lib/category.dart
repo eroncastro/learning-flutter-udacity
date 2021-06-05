@@ -25,7 +25,7 @@ class Category extends StatelessWidget {
 
   final String name;
   final IconData icon;
-  final MaterialColor color;
+  final Color color;
 
   const Category({required this.name, required this.icon, required this.color});
 
@@ -39,36 +39,39 @@ class Category extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     // TODO: Build the custom widget here, referring to the Specs.
-    return Container(
-      height: height,
-      color: color.shade100,
-      padding: EdgeInsets.all(containerPadding),
-      child: Material(
-        color: color.shade100,
+    return Material(
+      color: Colors.green[100], // TODO: Use transparent color
+      child: Container(
+        height: height,
         child: InkWell(
           borderRadius: BorderRadius.circular(borderRadius),
-          splashColor: color.shade600,
-          highlightColor: color.shade600,
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(iconPadding),
-                child: Icon(
-                  icon,
-                  size: iconSize,
-                ),
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: textFontSize,
-                ),
-              ),
-            ],
-          ),
+          splashColor: color,
+          highlightColor: color,
           onTap: () {
             print('I was tapped');
           },
+          child: Padding(
+            padding: EdgeInsets.all(containerPadding),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(iconPadding),
+                  child: Icon(
+                    icon,
+                    size: iconSize,
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
